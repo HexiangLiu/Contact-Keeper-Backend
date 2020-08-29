@@ -1,7 +1,18 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
 
+//connect to MongoDB
+mongoose
+  .connect(
+    `mongodb+srv://Hexiang:${process.env.DB_PASSWORD}@cluster0.wpcq8.mongodb.net/test?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log('Connect to MongoDB successfully'))
+  .catch((err) => console.error(err));
+
+// express server
 const app = express();
-
 const PORT = process.env.PORT || 8000;
 
 app.use('/api/users', require('./routes/users'));
