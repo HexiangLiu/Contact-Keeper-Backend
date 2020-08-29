@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 mongoose
   .connect(
     `mongodb+srv://Hexiang:${process.env.DB_PASSWORD}@cluster0.wpcq8.mongodb.net/contact_keeper?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
   )
   .then(() => console.log('Connect to MongoDB successfully'))
   .catch((err) => console.error(err));
