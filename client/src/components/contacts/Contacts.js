@@ -6,13 +6,20 @@ import ContactItem from './ContactItem';
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
 
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
 
+  if (!contacts.length) {
+    return <h4>You have not contacts yet...</h4>;
+  }
   return (
     <>
-      {contacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
+      {filtered
+        ? filtered.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))
+        : contacts.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))}
     </>
   );
 };
