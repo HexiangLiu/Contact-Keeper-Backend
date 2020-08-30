@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const ContactItem = ({ id, name, email, phone, type }) => {
   return (
@@ -24,7 +23,7 @@ const ContactItem = ({ id, name, email, phone, type }) => {
       </ul>
       <p>
         <button className="btn btn-dark btn-sm mr-2">Edit</button>
-        <button className="btn btn-danger btn-sm">Dark</button>
+        <button className="btn btn-danger btn-sm">Delete</button>
       </p>
     </div>
   );
