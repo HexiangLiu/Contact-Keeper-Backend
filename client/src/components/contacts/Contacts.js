@@ -11,7 +11,7 @@ const Contacts = () => {
   return (
     <>
       {contacts.map((contact) => (
-        <ContactItem key={contact.id} {...contact} />
+        <ContactItem key={contact.id} contact={contact} />
       ))}
     </>
   );
