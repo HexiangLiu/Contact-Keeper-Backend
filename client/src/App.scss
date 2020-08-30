@@ -1,3 +1,9 @@
+$theme-colors: (
+  'primary': #00416d,
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
 html {
   font-size: 100%;
 }
@@ -9,6 +15,10 @@ body {
 * {
   margin: 0;
   padding: 0;
+}
+.form-container {
+  margin: 0 auto;
+  width: 50%;
 }
 
 .item-enter {

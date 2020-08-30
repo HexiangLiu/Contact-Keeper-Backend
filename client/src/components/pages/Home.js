@@ -6,10 +6,10 @@ import ContactsFilter from '../contacts/ContactsFilter';
 const Home = () => {
   return (
     <div className="row">
-      <div className="col-8">
+      <div className="col-lg-8 col-6">
         <ContactForm />
       </div>
-      <div className="col-4">
+      <div className="col-lg-4 col-6">
         <ContactsFilter />
         <Contacts />
       </div>
