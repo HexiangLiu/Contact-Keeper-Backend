@@ -6,13 +6,15 @@ const contactSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  email: {
+  name: {
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+  },
   phone: {
     type: String,
-    required: true,
   },
   type: {
     type: String,
