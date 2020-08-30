@@ -17,8 +17,22 @@ const ContactState = (props) => {
         id: 1,
         name: 'Harry White',
         email: 'harry@gmail.com',
-        phones: '111-111-1111',
+        phone: '111-111-1111',
         type: 'professional',
+      },
+      {
+        id: 1,
+        name: 'Harry White',
+        email: 'harry@gmail.com',
+        phone: '111-111-1111',
+        type: 'professional',
+      },
+      {
+        id: 1,
+        name: 'Harry White',
+        email: 'harry@gmail.com',
+        phone: '111-111-1111',
+        type: 'personal',
       },
     ],
   };
