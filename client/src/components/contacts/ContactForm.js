@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ContactContext from '../../context/contact/contactContext';
-import { ADD_CONTACT } from '../../context/types';
 
 const ContactForm = () => {
-  const { addContact } = useContext(ContactContext);
+  const { current, addContact, clearCurrent, updateContact } = useContext(
+    ContactContext
+  );
   const [contact, setContact] = useState({
     name: '',
     email: '',
@@ -11,15 +12,21 @@ const ContactForm = () => {
     type: 'personal',
   });
 
+  useEffect(() => {
+    if (current) {
+      setContact(current);
+    } else {
+      clearFields();
+    }
+  }, [current]);
+
   const { name, email, phone, type } = contact;
 
   const handleChange = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    addContact(contact);
-    e.preventDefault();
+  const clearFields = () => {
     setContact({
       name: '',
       email: '',
@@ -28,9 +35,23 @@ const ContactForm = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (current) {
+      updateContact(contact);
+      clearCurrent();
+    } else {
+      addContact(contact);
+    }
+
+    clearFields();
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="text-center">Add Contact</h2>
+      <h2 className="text-center">
+        {current ? 'Update Contact' : 'Add Contact'}
+      </h2>
       <div className="form-group">
         <label htmlFor="name">Contact Name</label>
         <input
@@ -97,9 +118,20 @@ const ContactForm = () => {
         </label>
       </div>
       <div className="form-group mt-3">
-        <button type="submit" className="btn btn-block btn-primary">
-          Add Contact
+        <button
+          type="submit"
+          className={`btn btn-block ${current ? 'btn-success' : 'btn-primary'}`}
+        >
+          {current ? 'Update Contact' : 'Add Contact'}
         </button>
+        {current && (
+          <button
+            className="btn btn-light btn-block"
+            onClick={() => clearCurrent()}
+          >
+            Clear
+          </button>
+        )}
       </div>
     </form>
   );
