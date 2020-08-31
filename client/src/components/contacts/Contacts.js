@@ -12,7 +12,7 @@ const Contacts = () => {
 
   useEffect(() => {
     getContacts();
-    //eslint-diabled-next-line
+    //eslint-disable-next-line
   }, []);
 
   return (
