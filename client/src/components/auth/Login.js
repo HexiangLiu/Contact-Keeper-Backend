@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Login = () => {
+const Login = (props) => {
+  const { login, isAuthenticated, error, clearErrors } = useContext(
+    AuthContext
+  );
+  const { setAlert } = useContext(AlertContext);
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+
+    if (error) {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    //eslint-disable-next-line
+  }, [isAuthenticated, error]);
 
   const { email, password } = user;
 
@@ -14,7 +32,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit login');
+    login({ email, password });
   };
 
   return (
@@ -31,6 +49,7 @@ const Login = () => {
             name="email"
             value={email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group">
@@ -41,6 +60,7 @@ const Login = () => {
             name="password"
             value={password}
             onChange={handleChange}
+            required
           />
         </div>
 
