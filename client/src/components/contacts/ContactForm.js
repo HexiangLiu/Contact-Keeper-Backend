@@ -50,7 +50,8 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="text-center">
-        {current ? 'Update Contact' : 'Add Contact'}
+        {current ? 'Update' : 'Add'}{' '}
+        <span className="text-primary">Contact</span>
       </h2>
       <div className="form-group">
         <label htmlFor="name">Contact Name</label>

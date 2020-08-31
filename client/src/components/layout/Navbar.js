@@ -38,13 +38,26 @@ const Navbar = ({ title, icon }) => {
     </>
   );
   return (
-    <nav className="navbar bg-primary navbar-expand-lg navbar-dark mb-5">
+    <nav className="navbar bg-primary navbar-expand-md navbar-dark mb-5">
       <a href="/" className="navbar-brand h1">
         <i className={icon} /> {title}
       </a>
-      <ul className="navbar-nav ml-auto">
-        {isAuthenticated ? authLinks : guestLinks}
-      </ul>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarToggler"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarToggler">
+        <ul className="navbar-nav ml-auto">
+          {isAuthenticated ? authLinks : guestLinks}
+        </ul>
+      </div>
     </nav>
   );
 };

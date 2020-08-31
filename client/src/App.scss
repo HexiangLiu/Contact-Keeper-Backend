@@ -7,10 +7,19 @@ $theme-colors: (
 
 html {
   font-size: 100%;
+
+  @media screen and (max-width: 720px) {
+    font-size: 80%;
+  }
+
+  @media screen and (max-width: 576px) {
+    font-size: 70%;
+  }
 }
 
 body {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 * {
@@ -20,6 +29,14 @@ body {
 .form-container {
   margin: 0 auto;
   width: 50%;
+
+  @media screen and (max-width: 720px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 }
 
 .item-enter {
