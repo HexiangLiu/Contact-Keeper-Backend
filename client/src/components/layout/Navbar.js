@@ -1,34 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import AuthContext from '../../context/auth/authContext';
+
 const Navbar = ({ title, icon }) => {
+  const { user, logout, isAuthenticated } = useContext(AuthContext);
+
+  const onLogout = () => {
+    logout();
+  };
+  const authLinks = (
+    <>
+      <li className="nav-item text-white mr-3">Hello {user && user.name}</li>
+      <li className="nav-item text-white logout" onClick={onLogout}>
+        <i className="fas fa-sign-out-alt" /> <span>Logout</span>
+      </li>
+    </>
+  );
+
+  const guestLinks = (
+    <>
+      <li className="nav-item">
+        <Link className="nav-link" to="/register">
+          Register
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/login">
+          Login
+        </Link>
+      </li>
+    </>
+  );
   return (
     <nav className="navbar bg-primary navbar-expand-lg navbar-dark mb-5">
       <a href="/" className="navbar-brand h1">
         <i className={icon} /> {title}
       </a>
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/about">
-            About
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Register
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-        </li>
+        {isAuthenticated ? authLinks : guestLinks}
       </ul>
     </nav>
   );
