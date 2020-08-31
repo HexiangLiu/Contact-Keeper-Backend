@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 
-const User = require('../models/User');
 const Contact = require('../models/Contact');
 // @route  GET /api/contacts
 // @desc   Get all users contacts
