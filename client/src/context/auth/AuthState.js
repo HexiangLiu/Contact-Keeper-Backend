@@ -11,6 +11,7 @@ import {
   LOGOUT,
   CLEAR_FILTER,
   CLEAR_ERRORS,
+  AUTH_ERROR,
 } from '../types';
 
 const AuthState = (props) => {
@@ -25,8 +26,18 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
-  const loadUser = () => {
-    console.log('loadUser');
+  const loadUser = async () => {
+    try {
+      const res = await axios.get('/api/auth', {
+        headers: {
+          'x-auth-token': localStorage.getItem('token'),
+        },
+      });
+
+      dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
+    }
   };
 
   // Register User
@@ -39,11 +50,13 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post('/api/users', user, config);
-      console.log(res);
+
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+
+      loadUser();
     } catch (err) {
       console.log(err.response);
       dispatch({
