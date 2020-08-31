@@ -1,32 +1,49 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ContactContext from '../../context/contact/contactContext';
 
+import Spinner from '../layout/Spinner';
 import ContactItem from './ContactItem';
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
 
-  const { contacts, filtered } = contactContext;
+  const { contacts, filtered, getContacts, loading } = contactContext;
 
-  if (!contacts.length) {
-    return <h4>You have no contacts yet...</h4>;
-  }
+  useEffect(() => {
+    getContacts();
+    //eslint-diabled-next-line
+  }, []);
+
   return (
     <>
-      <TransitionGroup>
-        {filtered
-          ? filtered.map((contact) => (
-              <CSSTransition key={contact._id} classNames="item" timeout={1000}>
-                <ContactItem key={contact._id} contact={contact} />
-              </CSSTransition>
-            ))
-          : contacts.map((contact) => (
-              <CSSTransition key={contact._id} classNames="item" timeout={1000}>
-                <ContactItem key={contact._id} contact={contact} />
-              </CSSTransition>
-            ))}
-      </TransitionGroup>
+      {loading ? (
+        <Spinner />
+      ) : contacts.length ? (
+        <TransitionGroup>
+          {filtered
+            ? filtered.map((contact) => (
+                <CSSTransition
+                  key={contact._id}
+                  classNames="item"
+                  timeout={1000}
+                >
+                  <ContactItem key={contact._id} contact={contact} />
+                </CSSTransition>
+              ))
+            : contacts.map((contact) => (
+                <CSSTransition
+                  key={contact._id}
+                  classNames="item"
+                  timeout={1000}
+                >
+                  <ContactItem key={contact._id} contact={contact} />
+                </CSSTransition>
+              ))}
+        </TransitionGroup>
+      ) : (
+        <h5>You have not added any contacts yet</h5>
+      )}
     </>
   );
 };
