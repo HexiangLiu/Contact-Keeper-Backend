@@ -10,20 +10,20 @@ const Contacts = () => {
   const { contacts, filtered } = contactContext;
 
   if (!contacts.length) {
-    return <h4>You have not contacts yet...</h4>;
+    return <h4>You have no contacts yet...</h4>;
   }
   return (
     <>
       <TransitionGroup>
         {filtered
           ? filtered.map((contact) => (
-              <CSSTransition key={contact.id} classNames="item" timeout={1000}>
-                <ContactItem key={contact.id} contact={contact} />
+              <CSSTransition key={contact._id} classNames="item" timeout={1000}>
+                <ContactItem key={contact._id} contact={contact} />
               </CSSTransition>
             ))
           : contacts.map((contact) => (
-              <CSSTransition key={contact.id} classNames="item" timeout={1000}>
-                <ContactItem key={contact.id} contact={contact} />
+              <CSSTransition key={contact._id} classNames="item" timeout={1000}>
+                <ContactItem key={contact._id} contact={contact} />
               </CSSTransition>
             ))}
       </TransitionGroup>
